@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="demoHead"></div>
+    <div>
+        <div style="float:left">
+            <h1>Student Records</h1>
+            <div style="clear:both;"></div>
+        </div>
+
+    </div>
+    <br/>
+    <center>
+        <h2>Students </h2>
+    </center>
+    <hr>
+    <table style="text-align:center; border:0; cellpadding:0;cellspacing:0">
+        <tr>
+            <td style="width: 200px;"><h4>First Name</h4></td>
+            <td style="width: 200px;"><h4>Last Name</h4></td>
+            <td style="width: 200px;"><h4>Email</h4></td>
+            <td style="width: 250px;"><h4>Courses</h4></td>
+        </tr>
+        {% for entry in student_entries %}
+        <tr>
+            <td>{{entry.firstname}}</td>
+            <td>{{entry.lastname}}</td>
+            <td>{{entry.email}}</td>
+            <td>{{entry.courses.all|join:','}}</td>
+        </tr>
+        {%endfor%}
+        
+    </table>
+    
+    <center>
+            <h2>Courses</h2>
+        </center>
+        <hr>
+        <table style="text-align:center; border:0; cellpadding:0;cellspacing:0">
+            <tr>
+                <td style="width: 200px;"><h4>Name</h4></td>
+                <td style="width: 200px;"><h4>Instructor</h4></td>
+                <td style="width: 200px;"><h4>Semester-Year</h4></td>
+            </tr>
+            {% for entry in course_entries %}
+            <tr>
+                <td>{{entry.name}}</td>
+                <td>{{entry.instructor}}</td>
+                <td>{{entry.semester_year}}</td>
+            </tr>
+            {%endfor%}
+            
+        </table>
+
+        <center>
+                <h2>Instructors</h2>
+            </center>
+            <hr>
+            <table style="text-align:center; border:0; cellpadding:0;cellspacing:0">
+                <tr>
+                    <td style="width: 200px;"><h4>First Name</h4></td>
+                    <td style="width: 200px;"><h4>Last Name</h4></td>
+                    <td style="width: 200px;"><h4>Email</h4></td>
+                </tr>
+                {% for entry in instructor_entries %}
+                <tr>
+                    <td>{{entry.firstname}}</td>
+                    <td>{{entry.lastname}}</td>
+                    <td>{{entry.email}}</td>
+                </tr>
+                {%endfor%}
+                
+            </table>
+
+
+</body>
+
+</html>

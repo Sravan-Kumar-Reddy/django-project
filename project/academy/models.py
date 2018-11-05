@@ -1,48 +1,46 @@
 from django.db import models
 
 # Create your models here.
-from django.db import models
 
-# Create your models here.
-
-class Student(models.Model):
-    class Meta:
-        db_table = 'Student'
-
-    FirstName = models.CharField(max_length=200,default = "FN")
-    LastName = models.CharField(max_length=200,default = "LN")
-    Email = models.CharField(max_length=200,default = "email")
-    Courses = models.CharField(max_length=200,default = "Cou")
-    def __str__(self):
-        return self.FirstName
-
-'''
-    def was_published_recently(self):
-        now = timezone.now()
-        return now - datetime.timedelta(days=1) <= self.pub_date <= now
-'''
 
 
 class Instructor(models.Model):
     class Meta:
         db_table = 'Instructor'
 
-    FirstName = models.CharField(max_length=200,default = "FN")
-    LastName = models.CharField(max_length=200,default = "LN")
-    Email = models.CharField(max_length=200,default = "email")
+    firstname = models.CharField(max_length=200,default = "FN")
+    lastname = models.CharField(max_length=200,default = "LN")
+    email = models.EmailField(max_length=200,default = "email")
 
     def __str__(self):
-        return self.FirstName
+        return self.firstname
 
 
 class Course(models.Model):
     class Meta:
         db_table = 'Course'
 
-    Name = models.CharField(max_length=200,default = "Cname")
+    name = models.CharField(max_length=200,default = "Cname")
     #Instructor = models.CharField(max_length=200,default = "Instructor")
-    Instructor = models.ForeignKey(Instructor,on_delete=models.CASCADE)
-    Semester = models.CharField(max_length=200,default = "Sem")
-    Year = models.SmallIntegerField(default = 2015)
+    #year = models.SmallIntegerField(default = 2015)
+    instructor = models.ForeignKey(Instructor,on_delete=models.CASCADE)
+    semester_year = models.CharField(max_length=200,default = "Sem")
     def __str__(self):
-        return self.Name
+        return self.name
+
+class Student(models.Model):
+    class Meta:
+        db_table = 'Student'
+
+    firstname = models.CharField(max_length=200,default = "FN")
+    lastname = models.CharField(max_length=200,default = "LN")
+    email = models.CharField(max_length=200,default = "email")
+    courses = models.ManyToManyField(Course)
+    def __str__(self):
+        return self.firstname
+
+'''
+    def was_published_recently(self):
+        now = timezone.now()
+        return now - datetime.timedelta(days=1) <= self.pub_date <= now
+'''
